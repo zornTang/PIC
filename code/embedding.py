@@ -14,7 +14,7 @@ parser.add_argument('--label_name',type=str,help='The type of PIC you want to tr
 parser.add_argument('--output_dir',type=str,help='The save directory of protein sequence embedding.')
 parser.add_argument('--toks_per_batch',type=int,default=10000, help='If you encounter a CUDA out of memory error, please reduce this value.')
 parser.add_argument('--repr_layers',type=list,default=[-1])
-parser.add_argument('--device',type=str,default='cuda:0',help='If you use CPU for training, you can input cpu; If you use GPU for training, you can enter cuda & GPU number, for example: cuda:0.')
+parser.add_argument('--device',type=str,default='cuda:7',help='If you use CPU for training, you can input cpu; If you use GPU for training, you can enter cuda & GPU number, for example: cuda:7.')
 parser.add_argument('--include',type=list,default=['mean','per_tok'])
 parser.add_argument('--truncation_seq_length',type=int,default=1024)
 args= parser.parse_args()

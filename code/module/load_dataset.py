@@ -34,8 +34,8 @@ class PIC_Dataset(Dataset):
         super().__init__()
         self.indexes = indexes
         self.target_dir = feature_dir
-        self.max_length=max_length
-        self.feature_length=feature_length
+        self.max_length=int(max_length)
+        self.feature_length=int(feature_length)
         self.cell_name=label_name
         self.device=device
     def load_pt(self, index: int):

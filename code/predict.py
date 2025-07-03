@@ -12,7 +12,7 @@ from module.PIC import PIC
 class ProteinPredictor:
     """蛋白质重要性预测器"""
     
-    def __init__(self, model_path, esm_model_path, device='cuda:0'):
+    def __init__(self, model_path, esm_model_path, device='cuda:7'):
         """
         初始化预测器
         
@@ -284,7 +284,7 @@ def main():
     parser.add_argument('--output_file', type=str, 
                        help='Output CSV file for results')
     parser.add_argument('--device', type=str, default='cuda:7',
-                       help='Device to use (cuda:0, cpu, etc.)')
+                       help='Device to use (cuda:7, cpu, etc.)')
     parser.add_argument('--pes_threshold', type=float, default=0.9,
                        help='PES (probability) threshold for biomarker analysis')
     parser.add_argument('--biomarker_analysis', action='store_true',

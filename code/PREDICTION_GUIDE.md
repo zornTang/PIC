@@ -39,7 +39,7 @@ from predict import ProteinPredictor
 predictor = ProteinPredictor(
     model_path="./result/model_train_results/PIC_human/PIC_human_model.pth",
     esm_model_path="./pretrained_model/esm2_t33_650M_UR50D.pt",
-    device='cuda:0'
+    device='cuda:7'
 )
 
 # 预测单个蛋白质

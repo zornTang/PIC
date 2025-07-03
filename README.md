@@ -53,20 +53,20 @@ The extracted sequence embeddng will be saved at file folder './result/seq_embed
 * human-level
 ```
 cd PIC
-python ./code/embedding.py --data_path ./data/human_data.pkl --fasta_file ./result/protein_sequence.fasta --model ./pretrained_model/esm2_t33_650M_UR50D.pt --label_name human --output_dir ./result/seq_embedding --device cuda:0 --truncation_seq_length 1024
+python ./code/embedding.py --data_path ./data/human_data.pkl --fasta_file ./result/protein_sequence.fasta --model ./pretrained_model/esm2_t33_650M_UR50D.pt --label_name human --output_dir ./result/seq_embedding --device cuda:7 --truncation_seq_length 1024
 ```
 
 * mouse-level
 ```
 cd PIC
-python ./code/embedding.py --data_path ./data/mouse_data.pkl --fasta_file ./result/protein_sequence.fasta --model ./pretrained_model/esm2_t33_650M_UR50D.pt --label_name mouse --output_dir ./result/seq_embedding --device cuda:0 --truncation_seq_length 1024
+python ./code/embedding.py --data_path ./data/mouse_data.pkl --fasta_file ./result/protein_sequence.fasta --model ./pretrained_model/esm2_t33_650M_UR50D.pt --label_name mouse --output_dir ./result/seq_embedding --device cuda:7 --truncation_seq_length 1024
 ```
 
 
 * cell-level
 ```
 cd PIC
-python ./code/embedding.py --data_path ./data/cell_data.pkl --fasta_file ./result/protein_sequence.fasta --model ./pretrained_model/esm2_t33_650M_UR50D.pt --label_name A549 --output_dir ./result/seq_embedding --device cuda:0 --truncation_seq_length 1024
+python ./code/embedding.py --data_path ./data/cell_data.pkl --fasta_file ./result/protein_sequence.fasta --model ./pretrained_model/esm2_t33_650M_UR50D.pt --label_name A549 --output_dir ./result/seq_embedding --device cuda:7 --truncation_seq_length 1024
 ```
 
 
