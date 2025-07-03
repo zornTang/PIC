@@ -16,7 +16,7 @@ from module.earlystopping import EarlyStopping
 
 
 parser = argparse.ArgumentParser(description='This is a Python script file for PIC model training.')
-parser.add_argument('--device',type=str,default='cuda:0',help='If you use CPU for training, you can input cpu; If you use GPU for training, you can enter cuda & GPU number, for example: cuda:0.')
+parser.add_argument('--device',type=str,default='cuda:7',help='If you use CPU for training, you can input cpu; If you use GPU for training, you can enter cuda & GPU number, for example: cuda:0.')
 parser.add_argument('--data_path',type=str,help='The save path of dataset for model training.')
 parser.add_argument('--label_name',type=str,help='The type of PIC you want to train.')
 parser.add_argument('--test_ratio',type=float,default=0.1)

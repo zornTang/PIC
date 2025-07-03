@@ -1,0 +1,71 @@
+PROTEIN PREDICTION ANALYSIS REPORT
+==================================================
+
+1. DATASET OVERVIEW
+--------------------
+Total proteins analyzed: 1249
+Data source: ../neutrophil_predictions_sorted.csv
+
+2. PES SCORE STATISTICS
+-------------------------
+Mean PES score: 0.2266
+Median PES score: 0.0748
+Standard deviation: 0.2995
+Min PES score: 0.0004
+Max PES score: 0.9915
+
+3. PREDICTION DISTRIBUTION
+---------------------------
+Non-essential: 1016 (81.3%)
+Essential: 233 (18.7%)
+
+4. CONFIDENCE DISTRIBUTION
+----------------------------
+High: 984 (78.8%)
+Medium: 205 (16.4%)
+Low: 60 (4.8%)
+
+5. BIOMARKER ANALYSIS
+----------------------
+Potential biomarkers (PES ≥ 0.9): 75
+Biomarker percentage: 6.0%
+Average PES score of biomarkers: 0.9575
+Average sequence length of biomarkers: 802.0
+
+6. SEQUENCE LENGTH STATISTICS
+-------------------------------
+Mean length: 381.9
+Median length: 224.0
+Min length: 2
+Max length: 3526
+
+7. CORRELATION ANALYSIS
+------------------------
+PES Score vs Sequence Length correlation: 0.3481
+Interpretation: Moderate correlation
+
+8. TOP 10 POTENTIAL BIOMARKERS
+--------------------------------
+ 1. ENSP00000350359.2|ENST00000357727.7|ENSG0000014659...
+    PES Score: 0.9915, Length: 508
+ 2. ENSP00000379594.2|ENST00000396300.6|ENSG0000014659...
+    PES Score: 0.9903, Length: 501
+ 3. ENSP00000486252.1|ENST00000629237.2|ENSG0000028096...
+    PES Score: 0.9890, Length: 263
+ 4. ENSP00000453081.1|ENST00000559929.5|ENSG0000014033...
+    PES Score: 0.9888, Length: 782
+ 5. ENSP00000387197.1|ENST00000409603.5|ENSG0000014659...
+    PES Score: 0.9883, Length: 475
+ 6. ENSP00000379593.2|ENST00000396299.6|ENSG0000014659...
+    PES Score: 0.9883, Length: 475
+ 7. ENSP00000453107.1|ENST00000557907.5|ENSG0000014033...
+    PES Score: 0.9883, Length: 764
+ 8. ENSP00000453083.1|ENST00000557997.5|ENSG0000014033...
+    PES Score: 0.9883, Length: 764
+ 9. ENSP00000453435.1|ENST00000558379.5|ENSG0000014033...
+    PES Score: 0.9882, Length: 767
+10. ENSP00000394717.3|ENST00000451782.7|ENSG0000014033...
+    PES Score: 0.9876, Length: 769
+
+Report generated successfully!
+For detailed visualizations, please check the PNG files in this directory.

@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyTorch model files
+*.pth
+*.pt
+
+# Data files
+*.pkl
+*.csv
+*.fasta
+*.fa
+
+# Results and outputs
+result/seq_embedding/
+result/model_train_results/
+*.png
+*.jpg
+*.jpeg
+
+# Pretrained models
+pretrained_model/
+
+# VSCode
+.vscode/
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+wget-log 
