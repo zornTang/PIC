@@ -398,7 +398,7 @@ class ProteinVisualizationAnalyzer:
         plt.tight_layout()
         return fig
     
-    def generate_report(self, output_dir='visualization_results'):
+    def generate_report(self, output_dir='neutrophil_analysis_results'):
         """生成完整的可视化报告"""
         import os
         os.makedirs(output_dir, exist_ok=True)
@@ -525,7 +525,7 @@ class ProteinVisualizationAnalyzer:
 
 def main():
     """主函数"""
-    csv_file = "../neutrophil_predictions_sorted.csv"
+    csv_file = "../neutrophil_mane_proteins_predictions_ensemble.csv"
     
     # 检查文件是否存在
     import os
