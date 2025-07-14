@@ -1,0 +1,185 @@
+================================================================================
+ENHANCED HUMAN vs IMMUNE CELL LEVEL PROTEIN ESSENTIALITY COMPARISON
+================================================================================
+
+1. BASIC STATISTICS
+--------------------
+Total proteins analyzed: 1249
+Human level essential proteins: 255 (20.4%)
+Immune level essential proteins: 146 (11.7%)
+
+2. PREDICTION AGREEMENT ANALYSIS
+--------------------------------
+Consistent predictions: 948 (75.9%)
+Inconsistent predictions: 301 (24.1%)
+
+3. CORRELATION ANALYSIS
+-----------------------
+Pearson correlation: 0.1162 (p-value: 3.85e-05)
+Spearman correlation: 0.1127 (p-value: 6.61e-05)
+
+4. SCORE DIFFERENCE ANALYSIS
+----------------------------
+Mean difference (Human - Immune): 0.0353
+Standard deviation: 0.3715
+Median difference: -0.0171
+Range: [-0.8634, 0.9410]
+
+5. HIGH-CONFIDENCE PROTEIN ANALYSIS
+-----------------------------------
+Threshold: PES ≥ 0.8
+Human-only high-confidence: 182
+Immune-only high-confidence: 15
+Both models high-confidence: 2
+
+6. DISAGREEMENT PROTEIN ANALYSIS
+-------------------------------
+Human Essential + Immune Non-essential: 205
+Human Non-essential + Immune Essential: 96
+
+Top 10 Human-specific Essential Proteins:
+   1. CREB5-201: Human=0.998, Immune=0.193
+      功能: 转录调节因子 - cAMP反应元件结合蛋白
+   2. CREB5-204: Human=0.997, Immune=0.196
+      功能: 转录调节因子 - cAMP反应元件结合蛋白
+   3. SMCHD1-201: Human=0.997, Immune=0.238
+      功能: 表观遗传调节 - 结构维持染色体蛋白
+   4. SOX6-218: Human=0.996, Immune=0.158
+      功能: 转录因子 - SRY相关HMG-box蛋白
+   5. SOX6-210: Human=0.995, Immune=0.160
+      功能: 转录因子 - SRY相关HMG-box蛋白
+   6. SOX6-208: Human=0.995, Immune=0.160
+      功能: 转录因子 - SRY相关HMG-box蛋白
+   7. SOX6-201: Human=0.995, Immune=0.148
+      功能: 转录因子 - SRY相关HMG-box蛋白
+   8. SOX6-202: Human=0.995, Immune=0.148
+      功能: 转录因子 - SRY相关HMG-box蛋白
+   9. SMCHD1-220: Human=0.995, Immune=0.260
+      功能: 表观遗传调节 - 结构维持染色体蛋白
+  10. SOX6-219: Human=0.995, Immune=0.140
+      功能: 转录因子 - SRY相关HMG-box蛋白
+
+Top 10 Immune-specific Essential Proteins:
+   1. H2BC4-203: Human=0.046, Immune=0.899
+      功能: 组蛋白 - 核心组蛋白H2B
+   2. H2BC4-201: Human=0.046, Immune=0.899
+      功能: 组蛋白 - 核心组蛋白H2B
+   3. H2BC4-202: Human=0.046, Immune=0.899
+      功能: 组蛋白 - 核心组蛋白H2B
+   4. H2BC11-203: Human=0.059, Immune=0.897
+      功能: 组蛋白 - 核心组蛋白H2B
+   5. H2BC11-201: Human=0.059, Immune=0.897
+      功能: 组蛋白 - 核心组蛋白H2B
+   6. H2BC18-201: Human=0.025, Immune=0.889
+      功能: 组蛋白 - 核心组蛋白H2B
+   7. H2BC18-204: Human=0.035, Immune=0.870
+      功能: 组蛋白 - 核心组蛋白H2B
+   8. HYCC2-205: Human=0.272, Immune=0.866
+      功能: 细胞周期调节 - 细胞周期检查点蛋白
+   9. SOD2-202: Human=0.215, Immune=0.831
+      功能: 抗氧化酶 - 超氧化物歧化酶2
+  10. SOD2-201: Human=0.215, Immune=0.831
+      功能: 抗氧化酶 - 超氧化物歧化酶2
+
+7. CONSENSUS ESSENTIAL PROTEINS
+-----------------------------
+Proteins essential in both models: 50
+
+Top 10 Consensus Essential Proteins:
+   1. RPS4Y2-201: Human=0.993, Immune=0.982, Avg=0.987
+   2. SOD2-214: Human=0.954, Immune=0.795, Avg=0.875
+   3. NAMPT-219: Human=0.859, Immune=0.831, Avg=0.845
+   4. NAMPT-215: Human=0.978, Immune=0.710, Avg=0.844
+   5. NAMPT-213: Human=0.966, Immune=0.708, Avg=0.837
+   6. TLE3-215: Human=0.888, Immune=0.785, Avg=0.836
+   7. NAMPT-247: Human=0.980, Immune=0.668, Avg=0.824
+   8. NAMPT-201: Human=0.977, Immune=0.669, Avg=0.823
+   9. NAMPT-242: Human=0.977, Immune=0.669, Avg=0.823
+  10. NAMPT-205: Human=0.977, Immune=0.669, Avg=0.823
+
+8. ANALYSIS SUMMARY
+-----------------
+Key Findings:
+• Prediction agreement rate: 75.9%
+• Score correlation (Pearson): 0.116
+• Mean score difference: 0.035
+• High-confidence proteins overlap: 2 proteins
+• Total disagreement proteins: 301
+
+Biological Implications:
+• Different models capture distinct aspects of protein essentiality
+• Human-level model may reflect general cellular requirements
+• Immune-level model captures immune-specific functional needs
+• Combined analysis provides comprehensive essentiality assessment
+
+9. DETAILED FUNCTIONAL ANALYSIS
+--------------------------------
+Human-Specific Essential Proteins - Functional Patterns:
+  • 其他功能: 156 proteins (76.1%)
+  • 代谢酶: 13 proteins (6.3%)
+  • 转录调节因子: 8 proteins (3.9%)
+  • 转录因子: 7 proteins (3.4%)
+  • 表观遗传调节: 5 proteins (2.4%)
+  • 利钠肽受体: 5 proteins (2.4%)
+  • 组蛋白结合: 4 proteins (2.0%)
+  • 转录共抑制因子: 3 proteins (1.5%)
+  • 自噬相关: 2 proteins (1.0%)
+  • 细胞周期调节: 2 proteins (1.0%)
+
+生物学意义:
+  - 转录调节因子在人类层面更重要，反映复杂的基因调控网络
+  - 表观遗传调节蛋白质对维持细胞身份至关重要
+  - 代谢相关蛋白质支持基础细胞生存需求
+
+Immune-Specific Essential Proteins - Functional Patterns:
+  • 其他功能: 63 proteins (65.6%)
+  • 组蛋白: 10 proteins (10.4%)
+  • 代谢酶: 8 proteins (8.3%)
+  • 抗氧化酶: 8 proteins (8.3%)
+  • 细胞周期调节: 3 proteins (3.1%)
+  • 组蛋白结合: 2 proteins (2.1%)
+  • 转录共抑制因子: 1 proteins (1.0%)
+  • 表观遗传调节: 1 proteins (1.0%)
+
+生物学意义:
+  - 组蛋白相关蛋白质在免疫细胞激活中起关键作用
+  - 细胞周期调节蛋白质支持快速增殖需求
+  - 抗氧化酶应对免疫应答中的氧化应激
+
+Consensus Essential Proteins - Functional Patterns:
+  • 代谢酶: 21 proteins (42.0%)
+  • 转录共抑制因子: 13 proteins (26.0%)
+  • 其他功能: 9 proteins (18.0%)
+  • 组蛋白: 2 proteins (4.0%)
+  • 抗氧化酶: 2 proteins (4.0%)
+  • 细胞周期调节: 1 proteins (2.0%)
+  • 表观遗传调节: 1 proteins (2.0%)
+  • 核糖体蛋白: 1 proteins (2.0%)
+
+生物学意义:
+  - 核糖体蛋白质是所有细胞类型的基础需求
+  - 代谢酶维持细胞能量和物质代谢
+  - 这些蛋白质代表核心生存机制
+
+10. CLINICAL AND RESEARCH IMPLICATIONS
+-------------------------------------
+Drug Target Discovery:
+  • Human-specific proteins: Broad-spectrum therapeutic targets
+  • Immune-specific proteins: Precision immunomodulation targets
+  • Consensus proteins: Core survival mechanisms (use with caution)
+
+Disease Research Applications:
+  • Autoimmune diseases: Focus on immune-specific essential proteins
+  • Cancer research: Consider human-level essential proteins
+  • Immunodeficiency: Investigate consensus essential proteins
+
+Personalized Medicine:
+  • Combined model predictions provide comprehensive risk assessment
+  • Context-specific essentiality guides targeted interventions
+  • Functional categories inform mechanism-based therapies
+
+================================================================================
+ENHANCED REPORT WITH FUNCTIONAL ANALYSIS COMPLETE
+Generated files: 01_overview_comparison.png, 02_detailed_analysis.png,
+                03_biomarker_analysis.png, 04_functional_analysis.png
+================================================================================

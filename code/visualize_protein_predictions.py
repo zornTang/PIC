@@ -525,26 +525,34 @@ class ProteinVisualizationAnalyzer:
 
 def main():
     """主函数"""
-    csv_file = "../neutrophil_mane_proteins_predictions_ensemble.csv"
-    
-    # 检查文件是否存在
+    import sys
     import os
+
+    # 检查命令行参数
+    if len(sys.argv) > 1:
+        csv_file = sys.argv[1]
+    else:
+        # 默认使用免疫细胞集成预测结果
+        csv_file = "../neutrophil_immune_ensemble_predictions.csv"
+
+    # 检查文件是否存在
     if not os.path.exists(csv_file):
         print(f"Error: File '{csv_file}' not found!")
         print("Please make sure the CSV file is in the current directory.")
+        print("Usage: python visualize_protein_predictions.py [csv_file]")
         return
-    
+
     # 创建分析器
     analyzer = ProteinVisualizationAnalyzer(csv_file)
-    
+
     # 生成完整报告
     output_dir = analyzer.generate_report()
-    
+
     print(f"\n🎉 Analysis complete!")
     print(f"📊 Visualizations and report saved to: {output_dir}/")
     print(f"📈 Files generated:")
     print(f"   - 01_overview_analysis.png")
-    print(f"   - 02_detailed_analysis.png") 
+    print(f"   - 02_detailed_analysis.png")
     print(f"   - 03_biomarker_analysis.png")
     print(f"   - 04_statistical_summary.png")
     print(f"   - protein_analysis_report.txt")

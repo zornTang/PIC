@@ -215,7 +215,9 @@ def train_all_cell_lines(args):
     # 如果指定了特定细胞系，只训练这些
     if args.specific_cell_lines:
         specific_lines = args.specific_cell_lines.split(',')
-        cell_lines = [cl.strip() for cl in specific_lines if cl.strip() in cell_lines]
+        # 去重并过滤有效的细胞系
+        specified_cells = list(set([cl.strip() for cl in specific_lines if cl.strip()]))
+        cell_lines = [cl for cl in specified_cells if cl in cell_lines]
         logger.info(f"只训练指定的细胞系: {cell_lines}")
     
     # 训练统计
