@@ -28,10 +28,11 @@ NATURE_COLORS = {
 }
 
 # 设置matplotlib参数
-plt.rcParams['font.sans-serif'] = ['DejaVu Sans', 'Arial', 'SimHei']
+plt.rcParams['font.sans-serif'] = ['Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', 'sans-serif']
 plt.rcParams['axes.unicode_minus'] = False
 plt.rcParams['figure.dpi'] = 300
 plt.rcParams['savefig.dpi'] = 300
+plt.rcParams['font.size'] = 10
 
 def load_and_clean_data():
     """加载和清理数据"""
@@ -693,10 +694,38 @@ def create_functional_analysis_visualization(merged_df, disagreement, human_spec
                  NATURE_COLORS['primary_orange'], NATURE_COLORS['primary_purple'],
                  NATURE_COLORS['light_blue']][:len(human_func_counts)]
 
+        # 将中文标签转换为英文
+        english_labels = []
+        for label in human_func_counts.index:
+            if '转录' in label:
+                english_labels.append('Transcription')
+            elif '组蛋白' in label:
+                english_labels.append('Histone')
+            elif '代谢' in label:
+                english_labels.append('Metabolism')
+            elif '核糖体' in label:
+                english_labels.append('Ribosomal')
+            elif '表观遗传' in label:
+                english_labels.append('Epigenetic')
+            elif '细胞周期' in label:
+                english_labels.append('Cell Cycle')
+            else:
+                english_labels.append('Other')
+
         wedges, texts, autotexts = ax1.pie(human_func_counts.values,
-                                          labels=human_func_counts.index,
+                                          labels=english_labels,
                                           autopct='%1.1f%%', colors=colors,
-                                          textprops={'fontsize': 9, 'fontfamily': 'sans-serif'})
+                                          textprops={'fontsize': 9})
+
+        # 设置标签文字字体
+        for text in texts:
+            text.set_fontsize(9)
+
+        # 设置百分比文字字体
+        for autotext in autotexts:
+            autotext.set_fontsize(8)
+            autotext.set_fontweight('bold')
+
         ax1.set_title('Human-Specific Essential Proteins\nFunctional Categories',
                      fontsize=12, fontweight='bold')
 
@@ -713,10 +742,38 @@ def create_functional_analysis_visualization(merged_df, disagreement, human_spec
                  NATURE_COLORS['primary_orange'], NATURE_COLORS['primary_purple'],
                  NATURE_COLORS['light_red']][:len(immune_func_counts)]
 
+        # 将中文标签转换为英文
+        english_labels = []
+        for label in immune_func_counts.index:
+            if '转录' in label:
+                english_labels.append('Transcription')
+            elif '组蛋白' in label:
+                english_labels.append('Histone')
+            elif '代谢' in label:
+                english_labels.append('Metabolism')
+            elif '核糖体' in label:
+                english_labels.append('Ribosomal')
+            elif '表观遗传' in label:
+                english_labels.append('Epigenetic')
+            elif '细胞周期' in label:
+                english_labels.append('Cell Cycle')
+            else:
+                english_labels.append('Other')
+
         wedges, texts, autotexts = ax2.pie(immune_func_counts.values,
-                                          labels=immune_func_counts.index,
+                                          labels=english_labels,
                                           autopct='%1.1f%%', colors=colors,
-                                          textprops={'fontsize': 9, 'fontfamily': 'sans-serif'})
+                                          textprops={'fontsize': 9})
+
+        # 设置标签文字字体
+        for text in texts:
+            text.set_fontsize(9)
+
+        # 设置百分比文字字体
+        for autotext in autotexts:
+            autotext.set_fontsize(8)
+            autotext.set_fontweight('bold')
+
         ax2.set_title('Immune-Specific Essential Proteins\nFunctional Categories',
                      fontsize=12, fontweight='bold')
 
@@ -733,10 +790,38 @@ def create_functional_analysis_visualization(merged_df, disagreement, human_spec
                  NATURE_COLORS['primary_orange'], NATURE_COLORS['primary_purple'],
                  NATURE_COLORS['light_green']][:len(both_func_counts)]
 
+        # 将中文标签转换为英文
+        english_labels = []
+        for label in both_func_counts.index:
+            if '转录' in label:
+                english_labels.append('Transcription')
+            elif '组蛋白' in label:
+                english_labels.append('Histone')
+            elif '代谢' in label:
+                english_labels.append('Metabolism')
+            elif '核糖体' in label:
+                english_labels.append('Ribosomal')
+            elif '表观遗传' in label:
+                english_labels.append('Epigenetic')
+            elif '细胞周期' in label:
+                english_labels.append('Cell Cycle')
+            else:
+                english_labels.append('Other')
+
         wedges, texts, autotexts = ax3.pie(both_func_counts.values,
-                                          labels=both_func_counts.index,
+                                          labels=english_labels,
                                           autopct='%1.1f%%', colors=colors,
-                                          textprops={'fontsize': 9, 'fontfamily': 'sans-serif'})
+                                          textprops={'fontsize': 9})
+
+        # 设置标签文字字体
+        for text in texts:
+            text.set_fontsize(9)
+
+        # 设置百分比文字字体
+        for autotext in autotexts:
+            autotext.set_fontsize(8)
+            autotext.set_fontweight('bold')
+
         ax3.set_title('Consensus Essential Proteins\nFunctional Categories',
                      fontsize=12, fontweight='bold')
 
@@ -810,7 +895,7 @@ LIGHTBULB Clinical Significance:
     """
 
     ax6.text(0.05, 0.95, summary_text, transform=ax6.transAxes, fontsize=11,
-             verticalalignment='top', fontfamily='sans-serif',
+             verticalalignment='top',
              bbox=dict(boxstyle="round,pad=0.5", facecolor=NATURE_COLORS['light_blue'], alpha=0.3))
 
     plt.tight_layout()
@@ -820,6 +905,10 @@ def generate_comprehensive_report(merged_df, disagreement, output_dir='result/ne
     """生成综合分析报告 - 增强版"""
     import os
     os.makedirs(output_dir, exist_ok=True)
+
+    # 创建visualizations子目录
+    viz_dir = f'{output_dir}/visualizations'
+    os.makedirs(viz_dir, exist_ok=True)
 
     print("Generating comprehensive visualization report...")
 
@@ -843,21 +932,21 @@ def generate_comprehensive_report(merged_df, disagreement, output_dir='result/ne
 
     # 生成所有图表
     fig1 = create_overview_visualization(merged_df)
-    fig1.savefig(f'{output_dir}/01_overview_comparison.png', dpi=300, bbox_inches='tight')
+    fig1.savefig(f'{viz_dir}/01_overview_comparison.png', dpi=300, bbox_inches='tight')
     print("✓ Overview comparison saved")
 
     fig2 = create_detailed_comparison_analysis(merged_df, disagreement)
-    fig2.savefig(f'{output_dir}/02_detailed_analysis.png', dpi=300, bbox_inches='tight')
+    fig2.savefig(f'{viz_dir}/02_detailed_analysis.png', dpi=300, bbox_inches='tight')
     print("✓ Detailed analysis saved")
 
     fig3 = create_biomarker_analysis(merged_df, disagreement)
-    fig3.savefig(f'{output_dir}/03_biomarker_analysis.png', dpi=300, bbox_inches='tight')
+    fig3.savefig(f'{viz_dir}/03_biomarker_analysis.png', dpi=300, bbox_inches='tight')
     print("✓ Biomarker analysis saved")
 
     # 新增：功能分析可视化
     fig4 = create_functional_analysis_visualization(merged_df, disagreement,
                                                    human_specific, immune_specific, both_essential)
-    fig4.savefig(f'{output_dir}/04_functional_analysis.png', dpi=300, bbox_inches='tight')
+    fig4.savefig(f'{viz_dir}/04_functional_analysis.png', dpi=300, bbox_inches='tight')
     print("✓ Functional analysis saved")
 
     # 生成增强的文本报告
