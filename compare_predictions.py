@@ -696,7 +696,7 @@ def create_functional_analysis_visualization(merged_df, disagreement, human_spec
         wedges, texts, autotexts = ax1.pie(human_func_counts.values,
                                           labels=human_func_counts.index,
                                           autopct='%1.1f%%', colors=colors,
-                                          textprops={'fontsize': 9})
+                                          textprops={'fontsize': 9, 'fontfamily': 'sans-serif'})
         ax1.set_title('Human-Specific Essential Proteins\nFunctional Categories',
                      fontsize=12, fontweight='bold')
 
@@ -716,7 +716,7 @@ def create_functional_analysis_visualization(merged_df, disagreement, human_spec
         wedges, texts, autotexts = ax2.pie(immune_func_counts.values,
                                           labels=immune_func_counts.index,
                                           autopct='%1.1f%%', colors=colors,
-                                          textprops={'fontsize': 9})
+                                          textprops={'fontsize': 9, 'fontfamily': 'sans-serif'})
         ax2.set_title('Immune-Specific Essential Proteins\nFunctional Categories',
                      fontsize=12, fontweight='bold')
 
@@ -736,7 +736,7 @@ def create_functional_analysis_visualization(merged_df, disagreement, human_spec
         wedges, texts, autotexts = ax3.pie(both_func_counts.values,
                                           labels=both_func_counts.index,
                                           autopct='%1.1f%%', colors=colors,
-                                          textprops={'fontsize': 9})
+                                          textprops={'fontsize': 9, 'fontfamily': 'sans-serif'})
         ax3.set_title('Consensus Essential Proteins\nFunctional Categories',
                      fontsize=12, fontweight='bold')
 
@@ -784,33 +784,33 @@ def create_functional_analysis_visualization(merged_df, disagreement, human_spec
     ax6 = axes[1, 2]
     ax6.axis('off')
 
-    # 创建生物学意义总结
+    # 创建生物学意义总结 - 使用英文避免字体问题
     summary_text = """
-生物学意义总结:
+Biological Significance Summary:
 
-🧬 人类特异性必需蛋白质:
-• 转录调节因子 (CREB5, SOX6)
-• 表观遗传调节 (SMCHD1)
-• 反映一般细胞生存需求
+DNA Human-Specific Essential Proteins:
+• Transcription factors (CREB5, SOX6)
+• Epigenetic regulation (SMCHD1)
+• General cell survival requirements
 
-🛡️ 免疫特异性必需蛋白质:
-• 组蛋白相关 (H2BC4, H2BC11)
-• 细胞周期调节 (HYCC2)
-• 免疫应答快速激活需求
+SHIELD Immune-Specific Essential Proteins:
+• Histone-related (H2BC4, H2BC11)
+• Cell cycle regulation (HYCC2)
+• Rapid immune response activation
 
-⚖️ 共识必需蛋白质:
-• 核糖体蛋白 (RPS4Y2)
-• 代谢酶 (NAMPT, SOD2)
-• 基础细胞功能维持
+BALANCE Consensus Essential Proteins:
+• Ribosomal proteins (RPS4Y2)
+• Metabolic enzymes (NAMPT, SOD2)
+• Basic cellular function maintenance
 
-💡 临床意义:
-• 人类特异性: 广谱治疗靶点
-• 免疫特异性: 精准免疫调节
-• 共识蛋白质: 核心生存机制
+LIGHTBULB Clinical Significance:
+• Human-specific: Broad therapeutic targets
+• Immune-specific: Precision immune regulation
+• Consensus proteins: Core survival mechanisms
     """
 
     ax6.text(0.05, 0.95, summary_text, transform=ax6.transAxes, fontsize=11,
-             verticalalignment='top', fontfamily='monospace',
+             verticalalignment='top', fontfamily='sans-serif',
              bbox=dict(boxstyle="round,pad=0.5", facecolor=NATURE_COLORS['light_blue'], alpha=0.3))
 
     plt.tight_layout()
