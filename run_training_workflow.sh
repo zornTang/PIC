@@ -156,10 +156,12 @@ else
     # 执行嵌入提取
     python code/embedding.py \
         --data_path data/human_data.pkl \
-        --model pretrained_model/esm2_t33_650M_UR50D.pt \
+        --fasta_file data/human_sequences.fa \
+        --model_name pretrained_model/esm2_t33_650M_UR50D.pt \
+        --label_name human \
         --output_dir result/seq_embedding \
         --device $DEVICE \
-        --batch_size $BATCH_SIZE
+        --toks_per_batch $((BATCH_SIZE * 150))
     
     # 记录结束时间
     embedding_end_time=$(date +%s)
