@@ -1,0 +1,15 @@
+Docking summary for result/dock_out_p2r
+============================================
+
+More negative affinities indicate stronger predicted binding.
+
+Gly-AMC: best affinity -6.50 kcal/mol (mode 1, RMSD 0.00-0.00 Å); avg top3 -6.30 kcal/mol; top5 spread 0.50 kcal/mol; min heavy-atom distance to Cys209 SG 11.22 Å.
+IDTT_baseline: best affinity -7.60 kcal/mol (mode 1, RMSD 0.00-0.00 Å); avg top3 -7.37 kcal/mol; top5 spread 0.50 kcal/mol; min heavy-atom distance to Cys209 SG 3.63 Å.
+LDTT_baseline: best affinity -7.10 kcal/mol (mode 1, RMSD 0.00-0.00 Å); avg top3 -7.00 kcal/mol; top5 spread 0.30 kcal/mol; min heavy-atom distance to Cys209 SG 4.59 Å.
+LLG: best affinity -6.80 kcal/mol (mode 1, RMSD 0.00-0.00 Å); avg top3 -6.70 kcal/mol; top5 spread 0.20 kcal/mol; min heavy-atom distance to Cys209 SG 3.87 Å.
+LLL-AMC: best affinity -8.10 kcal/mol (mode 1, RMSD 0.00-0.00 Å); avg top3 -7.93 kcal/mol; top5 spread 0.40 kcal/mol; min heavy-atom distance to Cys209 SG 5.39 Å.
+LLS: best affinity -6.40 kcal/mol (mode 1, RMSD 0.00-0.00 Å); avg top3 -6.33 kcal/mol; top5 spread 0.10 kcal/mol; min heavy-atom distance to Cys209 SG 3.59 Å.
+LR: best affinity -6.80 kcal/mol (mode 1, RMSD 0.00-0.00 Å); avg top3 -6.70 kcal/mol; top5 spread 0.40 kcal/mol; min heavy-atom distance to Cys209 SG 3.74 Å.
+Leu-AMC: best affinity -7.70 kcal/mol (mode 1, RMSD 0.00-0.00 Å); avg top3 -7.70 kcal/mol; top5 spread 0.70 kcal/mol; min heavy-atom distance to Cys209 SG 3.73 Å.
+Pro-AMC: best affinity -7.40 kcal/mol (mode 1, RMSD 0.00-0.00 Å); avg top3 -7.33 kcal/mol; top5 spread 0.30 kcal/mol; min heavy-atom distance to Cys209 SG 4.46 Å.
+LDTT_focus: best affinity -7.12 kcal/mol (mode 1, RMSD N/A); avg top3 -6.93 kcal/mol; top5 spread 0.44 kcal/mol; min heavy-atom distance to Cys209 SG 3.76 Å.

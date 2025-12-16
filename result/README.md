@@ -40,3 +40,13 @@ model_train_results/
 详细的工作流程和使用说明请参考项目根目录的文档：
 - **`README.md`** - 项目概览和快速开始
 - **`PIC_PROJECT_DOCUMENTATION.md`** - 完整项目文档
+
+## 📊 本次请求生成的图（A–D）
+- A 模型全局差异散点图: `result/neutrophil_analysis/visualizations/A_overall_scatter.png`
+- B 生物学功能富集气泡图: `result/neutrophil_analysis/visualizations/B_enrichment_bubble.png`
+- C 分子理化分布与定位:
+  - 理化多维箱线图: `result/neutrophil_analysis/visualizations/C_physicochemical_violin.png`
+  - 亚细胞定位热图: `result/neutrophil_analysis/visualizations/C_subcellular_localization.png`
+- D 汇合推论（聚焦PLBD1）: `result/neutrophil_analysis/visualizations/D_PLBD1_focus.png`
+
+说明：A 使用四分类表构建总体分布，B/定位图复用分析产出，C 从序列计算理化性质并按组别对比，D 将“模型输出 → 识别免疫特异 → 分子规律与生物学意义 → 代表蛋白PLBD1”串联呈现。

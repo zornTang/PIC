@@ -1,0 +1,9 @@
+Docking summary for result/docking_results
+==========================================
+
+More negative affinities indicate stronger predicted binding.
+
+Gly-AMC: best affinity -6.60 kcal/mol (mode 1, RMSD 0.00-0.00 Å); avg top3 -6.40 kcal/mol; top5 spread 0.40 kcal/mol; min heavy-atom distance to Cys209 SG 3.58 Å; Frac_prod 0/9 (0.0%).
+LDTT: best affinity -7.60 kcal/mol (mode 1, RMSD 0.00-0.00 Å); avg top3 -7.40 kcal/mol; top5 spread 0.60 kcal/mol; min heavy-atom distance to Cys209 SG 3.48 Å; Frac_prod 0/9 (0.0%).
+LLL-AMC: best affinity -8.80 kcal/mol (mode 1, RMSD 0.00-0.00 Å); avg top3 -8.63 kcal/mol; top5 spread 0.50 kcal/mol; min heavy-atom distance to Cys209 SG 3.52 Å; Frac_prod 0/9 (0.0%).
+Leu-AMC: best affinity -7.80 kcal/mol (mode 1, RMSD 0.00-0.00 Å); avg top3 -7.53 kcal/mol; top5 spread 0.70 kcal/mol; min heavy-atom distance to Cys209 SG 3.46 Å; Frac_prod 0/9 (0.0%).

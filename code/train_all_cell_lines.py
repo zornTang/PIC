@@ -164,7 +164,13 @@ def train_cell_line_model(cell_line, args):
         '--input_size', str(args.input_size),
         '--hidden_size', str(args.hidden_size),
         '--output_size', str(args.output_size),
-        '--random_seed', str(args.random_seed)
+        '--random_seed', str(args.random_seed),
+        '--model_variant', args.model_variant,
+        '--num_heads', str(args.num_heads),
+        '--cnn_channels', str(args.cnn_channels),
+        '--cnn_kernel_size', str(args.cnn_kernel_size),
+        '--cnn_layers', str(args.cnn_layers),
+        '--cnn_drop', str(args.cnn_drop)
     ]
     
     # 设置环境变量解决MKL兼容性问题
@@ -339,6 +345,19 @@ def main():
                        help='输出维度')
     parser.add_argument('--random_seed', type=int, default=42,
                        help='随机种子')
+    parser.add_argument('--model_variant', type=str, default='attention',
+                       choices=['attention','cnn','avgpool'],
+                       help='骨干结构：注意力、CNN 或平均池化')
+    parser.add_argument('--num_heads', type=int, default=1,
+                       help='注意力头数（仅 attention 模型生效）')
+    parser.add_argument('--cnn_channels', type=int, default=256,
+                       help='CNN 中间通道数（仅 cnn 模型生效）')
+    parser.add_argument('--cnn_kernel_size', type=int, default=5,
+                       help='CNN 卷积核大小')
+    parser.add_argument('--cnn_layers', type=int, default=2,
+                       help='CNN 堆叠层数')
+    parser.add_argument('--cnn_drop', type=float, default=0.1,
+                       help='CNN 层后的 dropout 比例')
     
     # 其他选项
     parser.add_argument('--specific_cell_lines', type=str,

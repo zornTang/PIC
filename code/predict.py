@@ -1,4 +1,5 @@
 import os
+import json
 import torch
 import torch.nn.functional as F
 import pandas as pd
@@ -29,6 +30,10 @@ class ProteinPredictor:
         self.device = device
         self.esm_model_path = esm_model_path
         self.ensemble_mode = ensemble_mode
+        self.max_length = 1000
+        self.embedding_dim = 1280
+        self.single_model_config = {}
+        self.single_model_variant = 'attention'
         
         # 加载ESM2模型
         print("Loading ESM2 model...")
@@ -50,17 +55,9 @@ class ProteinPredictor:
         else:
             # 单模型模式
             print("Loading single PIC model...")
-            self.pic_model = PIC(
-                input_shape=1280,
-                hidden_units=320,
-                device=device,
-                linear_drop=0.1,
-                attn_drop=0.3,
-                output_shape=1
-            )
-            self.pic_model.load_state_dict(torch.load(model_path, map_location=device))
-            self.pic_model.to(device)
-            self.pic_model.eval()
+            self.pic_model, self.single_model_config = self._load_and_prepare_model(model_path)
+            self.single_model_variant = self.single_model_config.get('model_variant', 'attention')
+            self._update_sequence_hparams(self.single_model_config)
         
         print("Models loaded successfully!")
     
@@ -77,19 +74,10 @@ class ProteinPredictor:
             
             if os.path.exists(model_path):
                 try:
-                    model = PIC(
-                        input_shape=1280,
-                        hidden_units=320,
-                        device=self.device,
-                        linear_drop=0.1,
-                        attn_drop=0.3,
-                        output_shape=1
-                    )
-                    model.load_state_dict(torch.load(model_path, map_location=self.device))
-                    model.to(self.device)
-                    model.eval()
-                    
+                    model, config = self._load_and_prepare_model(model_path)
                     self.models[cell_line] = model
+                    if loaded_count == 0:
+                        self._update_sequence_hparams(config)
                     loaded_count += 1
                     print(f"✓ Loaded {cell_line}")
                     
@@ -103,7 +91,7 @@ class ProteinPredictor:
         if loaded_count == 0:
             raise ValueError("No models loaded successfully")
     
-    def extract_sequence_embedding(self, sequence, max_length=1000):
+    def extract_sequence_embedding(self, sequence, max_length=None):
         """
         提取单个蛋白质序列的嵌入特征
         
@@ -115,6 +103,9 @@ class ProteinPredictor:
             feature: 序列嵌入特征
             start_padding_idx: 填充开始位置
         """
+        max_length = max_length or self.max_length
+        embedding_dim = self.embedding_dim
+
         # 清理序列
         sequence = sequence.replace('*', '').upper()
         
@@ -138,7 +129,7 @@ class ProteinPredictor:
             # 处理填充
             if feature.shape[0] < max_length:
                 pad_length = max_length - feature.shape[0]
-                zero_features = torch.zeros((pad_length, 1280)).to(self.device)
+                zero_features = torch.zeros((pad_length, embedding_dim)).to(self.device)
                 feature = torch.cat([feature, zero_features])
                 start_padding_idx = torch.tensor(feature.shape[0] - pad_length).to(self.device)
             else:
@@ -172,6 +163,8 @@ class ProteinPredictor:
             return self._ensemble_predict(feature, start_padding_idx, voting_strategy)
         else:
             # 单模型预测
+            if return_attention and self.single_model_variant != 'attention':
+                raise ValueError("Current model variant does not expose attention weights.")
             with torch.no_grad():
                 if return_attention:
                     logits, attention_weights = self.pic_model(feature, start_padding_idx, get_attention=True)
@@ -225,6 +218,43 @@ class ProteinPredictor:
             'voting_strategy': voting_strategy,
             'individual_results': individual_results
         }
+
+    def _load_model_config(self, model_path: str) -> Dict:
+        config_path = Path(model_path).parent / "model_config.json"
+        if config_path.exists():
+            with open(config_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        print(f"Warning: {config_path} not found. Falling back to default hyperparameters.")
+        return {}
+
+    def _instantiate_model(self, config: Dict) -> PIC:
+        return PIC(
+            input_shape=config.get('input_size', 1280),
+            hidden_units=config.get('hidden_size', 320),
+            device=self.device,
+            linear_drop=config.get('linear_drop', 0.1),
+            attn_drop=config.get('attn_drop', 0.3),
+            output_shape=config.get('output_size', 1),
+            model_variant=config.get('model_variant', 'attention'),
+            num_heads=config.get('num_heads', 1),
+            cnn_channels=config.get('cnn_channels', 256),
+            cnn_kernel_size=config.get('cnn_kernel_size', 5),
+            cnn_layers=config.get('cnn_layers', 2),
+            cnn_drop=config.get('cnn_drop', 0.1),
+        )
+
+    def _load_and_prepare_model(self, model_path: str):
+        config = self._load_model_config(model_path)
+        model = self._instantiate_model(config)
+        state = torch.load(model_path, map_location=self.device)
+        model.load_state_dict(state)
+        model.to(self.device)
+        model.eval()
+        return model, config
+
+    def _update_sequence_hparams(self, config: Dict):
+        self.max_length = config.get('max_length', self.max_length)
+        self.embedding_dim = config.get('input_size', self.embedding_dim)
     
     def predict_from_fasta(self, fasta_file, output_file=None, return_attention=False, voting_strategy='soft'):
         """

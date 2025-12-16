@@ -1,5 +1,6 @@
 import random
 import os
+import json
 import torch
 from torch.utils.data import Dataset, DataLoader, WeightedRandomSampler
 import torch.nn as nn
@@ -34,6 +35,13 @@ parser.add_argument('--hidden_size',type=int,default=320)
 parser.add_argument('--output_size',type=int,default=1)
 parser.add_argument('--num_epochs',type=int,default=15)
 parser.add_argument('--random_seed',type=float,default=42)
+parser.add_argument('--model_variant',type=str,default='attention',choices=['attention','cnn','avgpool'],
+                    help='Backbone variant: attention, cnn, or avgpool.')
+parser.add_argument('--num_heads',type=int,default=1,help='Number of attention heads when using the attention variant.')
+parser.add_argument('--cnn_channels',type=int,default=256,help='Intermediate channel size for CNN variant.')
+parser.add_argument('--cnn_kernel_size',type=int,default=5,help='Kernel size for CNN convolutions.')
+parser.add_argument('--cnn_layers',type=int,default=2,help='Number of stacked CNN layers.')
+parser.add_argument('--cnn_drop',type=float,default=0.1,help='Dropout applied after each CNN block.')
 args= parser.parse_args()
 
 
@@ -57,7 +65,7 @@ def model_train(dataloader,model,loss_fn,optimizer,device):
     return average_train_loss , average_train_acc
 
 
-def model_val(dataloader,model,loss_fn,device,mode):
+def model_val(dataloader,model,loss_fn,device,mode,return_raw=False):
     val_loss=0
     val_preds=[]
     val_pred_scores=[] 
@@ -92,6 +100,9 @@ def model_val(dataloader,model,loss_fn,device,mode):
           f"{mode} roc_auc: {average_val_roc_auc:>6f}",
           f"{mode} precision: { average_val_prec:>6f}",
           f"{mode} pr_auc: { average_val_pr_auc:>6f}")
+    if return_raw:
+        return (average_val_loss , average_val_acc,average_val_recall,average_val_roc_auc,
+                average_val_prec,average_val_f1,average_val_pr_auc,val_pred_scores,val_targets)
     return average_val_loss , average_val_acc,average_val_recall,average_val_roc_auc,average_val_prec,average_val_f1,average_val_pr_auc
 
 
@@ -162,7 +173,10 @@ def model_train_main(data_path,label_name,
                      max_length,feature_length,
                      learning_rate,input_size,hidden_size,
                      output_size,device,
-                     num_epochs,random_seed):
+                     num_epochs,random_seed,
+                     model_variant,num_heads,
+                     cnn_channels,cnn_kernel_size,
+                     cnn_layers,cnn_drop):
     train_dataloader,val_dataloader,test_dataloader=make_dataloader(data_path=data_path,
                                                             test_ratio=test_ratio,
                                                             val_ratio=val_ratio,
@@ -174,8 +188,18 @@ def model_train_main(data_path,label_name,
                                                             batch_size=batch_size,
                                                             device=device)
 
-    model = PIC(input_shape=input_size,hidden_units=hidden_size,device=device,
-                linear_drop=linear_drop,attn_drop=attn_drop,output_shape=output_size)
+    model = PIC(input_shape=input_size,
+                hidden_units=hidden_size,
+                device=device,
+                linear_drop=linear_drop,
+                attn_drop=attn_drop,
+                output_shape=output_size,
+                model_variant=model_variant,
+                num_heads=num_heads,
+                cnn_channels=cnn_channels,
+                cnn_kernel_size=cnn_kernel_size,
+                cnn_layers=cnn_layers,
+                cnn_drop=cnn_drop)
     model=model.to(device)
     optimizer = torch.optim.AdamW(filter(lambda p: p.requires_grad, model.parameters()), lr=learning_rate,weight_decay=1e-4)
     loss_fn =FocalLoss_L2(gamma=0, pos_weight=1.0, logits=True, reduction='mean',weight_decay=1e-4)
@@ -209,6 +233,93 @@ def model_train_main(data_path,label_name,
     val_result_df.to_csv(val_result_path, index=False)
     test_result_path = os.path.join(model_folder, f"{file_name}_test_result.csv")
     test_result_df.to_csv(test_result_path, index=False)
+
+    # 保存模型配置与统计信息
+    param_count = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    model_config = {
+        "data_path": data_path,
+        "label_name": label_name,
+        "test_ratio": test_ratio,
+        "val_ratio": val_ratio,
+        "feature_dir": feature_dir,
+        "batch_size": batch_size,
+        "linear_drop": linear_drop,
+        "attn_drop": attn_drop,
+        "max_length": max_length,
+        "feature_length": feature_length,
+        "learning_rate": learning_rate,
+        "input_size": input_size,
+        "hidden_size": hidden_size,
+        "output_size": output_size,
+        "device": device,
+        "num_epochs": num_epochs,
+        "random_seed": random_seed,
+        "model_variant": model_variant,
+        "num_heads": num_heads,
+        "cnn_channels": cnn_channels,
+        "cnn_kernel_size": cnn_kernel_size,
+        "cnn_layers": cnn_layers,
+        "cnn_drop": cnn_drop,
+        "param_count": int(param_count),
+    }
+    config_path = os.path.join(model_folder, "model_config.json")
+    with open(config_path, "w", encoding="utf-8") as f:
+        json.dump(model_config, f, indent=2, ensure_ascii=False)
+
+    # 保存用于后续显著性分析的预测结果
+    _, val_dict_snapshot, test_indexes_snapshot = get_index(
+        data_path=data_path,
+        label_name=label_name,
+        test_ratio=test_ratio,
+        val_ratio=val_ratio,
+        random_seed=random_seed,
+    )
+    val_indexes_snapshot = [list(d.keys())[0] for d in val_dict_snapshot]
+
+    val_dataset_eval = PIC_Dataset(
+        indexes=val_indexes_snapshot,
+        feature_dir=feature_dir,
+        label_name=label_name,
+        max_length=max_length,
+        feature_length=feature_length,
+        device=device,
+    )
+    test_dataset_eval = PIC_Dataset(
+        indexes=test_indexes_snapshot,
+        feature_dir=feature_dir,
+        label_name=label_name,
+        max_length=max_length,
+        feature_length=feature_length,
+        device=device,
+    )
+    val_eval_loader = DataLoader(val_dataset_eval, batch_size=batch_size, shuffle=False)
+    test_eval_loader = DataLoader(test_dataset_eval, batch_size=batch_size, shuffle=False)
+
+    val_eval_metrics = model_val(
+        dataloader=val_eval_loader,
+        model=model,
+        loss_fn=loss_fn,
+        device=device,
+        mode='val_eval',
+        return_raw=True
+    )
+    test_eval_metrics = model_val(
+        dataloader=test_eval_loader,
+        model=model,
+        loss_fn=loss_fn,
+        device=device,
+        mode='test_eval',
+        return_raw=True
+    )
+    val_scores = val_eval_metrics[-2]
+    val_targets = val_eval_metrics[-1]
+    test_scores = test_eval_metrics[-2]
+    test_targets = test_eval_metrics[-1]
+    np.save(os.path.join(model_folder, "val_pred_scores.npy"), val_scores)
+    np.save(os.path.join(model_folder, "val_targets.npy"), val_targets)
+    np.save(os.path.join(model_folder, "test_pred_scores.npy"), test_scores)
+    np.save(os.path.join(model_folder, "test_targets.npy"), test_targets)
+
     print(f'{file_name}_model has done')
 
 
@@ -231,11 +342,15 @@ def main():
         output_size=args.output_size,
         device=args.device,
         num_epochs=args.num_epochs,
-        random_seed=args.random_seed
+        random_seed=args.random_seed,
+        model_variant=args.model_variant,
+        num_heads=args.num_heads,
+        cnn_channels=args.cnn_channels,
+        cnn_kernel_size=args.cnn_kernel_size,
+        cnn_layers=args.cnn_layers,
+        cnn_drop=args.cnn_drop
     )
 
 
 if __name__ == '__main__':
     main()
-
-

@@ -63,3 +63,8 @@ Thumbs.db
 # Logs
 *.log
 wget-log 
+# Tool configurations and caches
+.claude/
+.matplotlib_cache/
+.mplconfig/
+logs/

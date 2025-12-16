@@ -1,0 +1,184 @@
+================================================================================
+ENHANCED HUMAN vs IMMUNE CELL LEVEL PROTEIN ESSENTIALITY COMPARISON
+================================================================================
+
+1. BASIC STATISTICS
+--------------------
+Total proteins analyzed: 5152
+Human level essential proteins: 1266 (24.6%)
+Immune level essential proteins: 478 (9.3%)
+
+2. PREDICTION AGREEMENT ANALYSIS
+--------------------------------
+Consistent predictions: 3710 (72.0%)
+Inconsistent predictions: 1442 (28.0%)
+
+3. CORRELATION ANALYSIS
+-----------------------
+Pearson correlation: 0.0734 (p-value: 1.35e-07)
+Spearman correlation: 0.1331 (p-value: 8.27e-22)
+
+4. SCORE DIFFERENCE ANALYSIS
+----------------------------
+Mean difference (Human - Immune): 0.0832
+Standard deviation: 0.3917
+Median difference: -0.0178
+Range: [-0.9455, 0.9737]
+
+5. HIGH-CONFIDENCE PROTEIN ANALYSIS
+-----------------------------------
+Threshold: PES ≥ 0.8
+Human-only high-confidence: 872
+Immune-only high-confidence: 42
+Both models high-confidence: 19
+
+6. DISAGREEMENT PROTEIN ANALYSIS
+-------------------------------
+Human Essential + Immune Non-essential: 1115
+Human Non-essential + Immune Essential: 327
+
+Top 10 Human-specific Essential Proteins:
+   1. PHF12: Human=0.998, Immune=0.434
+      功能: 其他功能
+   2. PHF12: Human=0.998, Immune=0.458
+      功能: 其他功能
+   3. PHF12: Human=0.998, Immune=0.359
+      功能: 其他功能
+   4. SMCHD1: Human=0.998, Immune=0.230
+      功能: 表观遗传调节 - 结构维持染色体蛋白
+   5. JMJD1C: Human=0.998, Immune=0.214
+      功能: 组蛋白 - 染色质结构
+   6. ACTN1: Human=0.998, Immune=0.081
+      功能: 其他功能
+   7. ACTN1: Human=0.998, Immune=0.081
+      功能: 其他功能
+   8. JMJD1C: Human=0.998, Immune=0.254
+      功能: 组蛋白 - 染色质结构
+   9. FCHO2: Human=0.998, Immune=0.179
+      功能: 其他功能
+  10. RAPGEF2: Human=0.997, Immune=0.036
+      功能: 其他功能
+
+Top 10 Immune-specific Essential Proteins:
+   1. ATP6V1B2: Human=0.007, Immune=0.952
+      功能: 其他功能
+   2. ATP6V1A: Human=0.450, Immune=0.940
+      功能: 其他功能
+   3. PLBD1: Human=0.328, Immune=0.923
+      功能: 其他功能
+   4. H2BC4: Human=0.013, Immune=0.891
+      功能: 组蛋白 - 核心组蛋白H2B
+   5. H2BC4: Human=0.013, Immune=0.891
+      功能: 组蛋白 - 核心组蛋白H2B
+   6. H2BC7: Human=0.013, Immune=0.891
+      功能: 组蛋白 - 染色质结构
+   7. H2BC11: Human=0.015, Immune=0.890
+      功能: 组蛋白 - 核心组蛋白H2B
+   8. H2BC11: Human=0.015, Immune=0.890
+      功能: 组蛋白 - 核心组蛋白H2B
+   9. H2BC21: Human=0.012, Immune=0.888
+      功能: 组蛋白 - 染色质结构
+  10. H2BC13: Human=0.012, Immune=0.885
+      功能: 组蛋白 - 染色质结构
+
+7. CONSENSUS ESSENTIAL PROTEINS
+-----------------------------
+Proteins essential in both models: 151
+
+Top 10 Consensus Essential Proteins:
+   1. ATP6V1A: Human=0.986, Immune=0.962, Avg=0.974
+   2. ATP6V1A: Human=0.986, Immune=0.962, Avg=0.974
+   3. ATP6V1A: Human=0.986, Immune=0.962, Avg=0.974
+   4. ATP6V1A: Human=0.986, Immune=0.962, Avg=0.974
+   5. ATP6V1A: Human=0.979, Immune=0.956, Avg=0.968
+   6. ATP6V1A: Human=0.985, Immune=0.949, Avg=0.967
+   7. RPS4Y2: Human=0.935, Immune=0.985, Avg=0.960
+   8. ATP6V1B2: Human=0.945, Immune=0.944, Avg=0.945
+   9. BAZ1A: Human=0.993, Immune=0.845, Avg=0.919
+  10. BAZ1A: Human=0.993, Immune=0.844, Avg=0.918
+
+8. ANALYSIS SUMMARY
+-----------------
+Key Findings:
+• Prediction agreement rate: 72.0%
+• Score correlation (Pearson): 0.073
+• Mean score difference: 0.083
+• High-confidence proteins overlap: 19 proteins
+• Total disagreement proteins: 1442
+
+Biological Implications:
+• Different models capture distinct aspects of protein essentiality
+• Human-level model may reflect general cellular requirements
+• Immune-level model captures immune-specific functional needs
+• Combined analysis provides comprehensive essentiality assessment
+
+9. DETAILED FUNCTIONAL ANALYSIS
+--------------------------------
+Human-Specific Essential Proteins - Functional Patterns:
+  • 其他功能: 775 proteins (88.9%)
+  • 代谢酶: 27 proteins (3.1%)
+  • 组蛋白: 18 proteins (2.1%)
+  • 转录共抑制因子: 13 proteins (1.5%)
+  • 膜金属内肽酶: 10 proteins (1.1%)
+  • 转录因子: 7 proteins (0.8%)
+  • 转录调节因子: 7 proteins (0.8%)
+  • 组蛋白结合: 4 proteins (0.5%)
+  • 核糖体蛋白: 3 proteins (0.3%)
+  • 表观遗传调节: 2 proteins (0.2%)
+  • 自噬相关: 2 proteins (0.2%)
+  • 细胞周期调节: 2 proteins (0.2%)
+  • 转录调节: 1 proteins (0.1%)
+  • 抗氧化酶: 1 proteins (0.1%)
+
+生物学意义:
+  - 转录调节因子在人类层面更重要，反映复杂的基因调控网络
+  - 表观遗传调节蛋白质对维持细胞身份至关重要
+  - 代谢相关蛋白质支持基础细胞生存需求
+
+Immune-Specific Essential Proteins - Functional Patterns:
+  • 其他功能: 25 proteins (59.5%)
+  • 组蛋白: 13 proteins (31.0%)
+  • 抗氧化酶: 2 proteins (4.8%)
+  • 细胞周期调节: 1 proteins (2.4%)
+  • 组蛋白结合: 1 proteins (2.4%)
+
+生物学意义:
+  - 组蛋白相关蛋白质在免疫细胞激活中起关键作用
+  - 细胞周期调节蛋白质支持快速增殖需求
+  - 抗氧化酶应对免疫应答中的氧化应激
+
+Consensus Essential Proteins - Functional Patterns:
+  • 其他功能: 113 proteins (74.8%)
+  • 代谢酶: 15 proteins (9.9%)
+  • 转录共抑制因子: 13 proteins (8.6%)
+  • 组蛋白: 7 proteins (4.6%)
+  • 抗氧化酶: 2 proteins (1.3%)
+  • 核糖体蛋白: 1 proteins (0.7%)
+
+生物学意义:
+  - 核糖体蛋白质是所有细胞类型的基础需求
+  - 代谢酶维持细胞能量和物质代谢
+  - 这些蛋白质代表核心生存机制
+
+10. CLINICAL AND RESEARCH IMPLICATIONS
+-------------------------------------
+Drug Target Discovery:
+  • Human-specific proteins: Broad-spectrum therapeutic targets
+  • Immune-specific proteins: Precision immunomodulation targets
+  • Consensus proteins: Core survival mechanisms (use with caution)
+
+Disease Research Applications:
+  • Autoimmune diseases: Focus on immune-specific essential proteins
+  • Cancer research: Consider human-level essential proteins
+  • Immunodeficiency: Investigate consensus essential proteins
+
+Personalized Medicine:
+  • Combined model predictions provide comprehensive risk assessment
+  • Context-specific essentiality guides targeted interventions
+  • Functional categories inform mechanism-based therapies
+
+================================================================================
+ENHANCED REPORT WITH FUNCTIONAL ANALYSIS COMPLETE
+Generated files: 01_overview_comparison.png, 02_detailed_analysis.png,
+                03_biomarker_analysis.png, 04_functional_analysis.png
+================================================================================
