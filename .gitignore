@@ -68,3 +68,15 @@ wget-log
 .matplotlib_cache/
 .mplconfig/
 logs/
+
+# Allow trained model artifacts (opt-in)
+!result/model_train_results/
+!result/model_train_results/**
+!result/model_train_results/**/*.pth
+!result/model_train_results/**/*.pt
+!result/model_train_results/**/*.json
+!result/model_train_results/**/*.csv
+!result/model_train_results/**/*.npy
+result/model_train_results/training_log_*.log
+result/model_train_results/*backup*/
+result/model_train_results_precision_*/
