@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 class FocalLoss_L2(nn.Module):
     """Focal Loss Function with Weight Decay"""
-    def __init__(self, gamma=0, pos_weight=1, weight_decay=0, logits=False, reduction='sum', name='FocalLoss'):
+    def __init__(self, gamma=0, pos_weight=3.5, weight_decay=0, logits=False, reduction='sum', name='FocalLoss'):
         super(FocalLoss_L2, self).__init__()
         self.name = name
         self.gamma = gamma

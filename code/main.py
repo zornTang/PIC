@@ -59,7 +59,7 @@ def model_train(dataloader,model,loss_fn,optimizer,device):
         optimizer.step()
         loss=loss.cpu().detach().numpy()
         train_loss += loss
-        train_acc=accuracy_score(y_true=y.squeeze().cpu().detach().numpy(),y_pred=train_pred.squeeze().cpu().detach().numpy())   
+        train_acc += accuracy_score(y_true=y.squeeze().cpu().detach().numpy(),y_pred=train_pred.squeeze().cpu().detach().numpy())   
     average_train_loss= train_loss / len(dataloader)
     average_train_acc= train_acc / len(dataloader)
     return average_train_loss , average_train_acc

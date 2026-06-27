@@ -1,5 +1,5 @@
 Docking summary for result/dock_out_p2r
-============================================
+=======================================
 
 More negative affinities indicate stronger predicted binding.
 
